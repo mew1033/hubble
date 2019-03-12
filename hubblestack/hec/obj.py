@@ -103,12 +103,11 @@ class Payload(object):
     @classmethod
     def rename_event_fields_in_payload(cls, dat):
         f = dat.get('fields')
-        e = dat.get('event')
-        if isinstance(f, dict) and isinstance(e, dict):
-            for k in f:
-                v = e.pop(k)
+        if isinstance(f, dict):
+            for k in f.keys():
+                v = f.pop(k)
                 if v is not None:
-                    e[k + '_meta'] = v
+                    f[k + '_meta'] = v
 
 
 # Thanks to George Starcher for the http_event_collector class (https://github.com/georgestarcher/)
